@@ -17,11 +17,14 @@ set splitright
 
 iabbrev _b import pdb; pdb.set_trace()
 
-nnoremap <silent> <C-S-f> :w:! black %:e %
-nnoremap <silent> <C-S-o> :w:! isort --sl %:e %
+nnoremap <silent> <C-S-f> :w^M^M:! black %^M^M:e %^M
+nnoremap <silent> <C-S-o> :w^M^M:! isort --sl %^M^M:e %^M
 
-autocmd VimEnter *.py vert terminal
-autocmd VimEnter *.py wincmd w
-autocmd VimEnter *.py Lex
-autocmd VimEnter *.py vertical resize 35
-autocmd VimEnter *.py wincmd l
+if !&diff
+    autocmd VimEnter * vert terminal ++kill=term
+    autocmd VimEnter * wincmd w
+    autocmd VimEnter * Lex
+    autocmd VimEnter * vertical resize 20%
+    autocmd VimEnter * wincmd l
+    autocmd VimEnter * vert resize 100%
+endif
